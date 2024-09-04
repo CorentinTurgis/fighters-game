@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { gameContainerComponent } from '../gameContainer/gameContainer.component';
 import { AuthGuard } from '../auth/auth.guard';
+import { gameContainerComponent } from '../game/container/gameContainer.component';
 
 export const routes: Routes = [
   {
