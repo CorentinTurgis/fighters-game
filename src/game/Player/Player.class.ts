@@ -6,13 +6,15 @@ import { Observable, of, tap, timer } from 'rxjs';
 export class Player {
   sprite: GameObjects.Sprite;
   name: string;
+  playerAttribute: { type: string; idle: string; attack: string; hit: string; special: string; run: string };
   playerClass: string;
   hp: number;
   atk: number;
   dodge: number;
 
-  constructor(name: string, playerClass: string, hp: number, atk: number, dodge: number) {
+  constructor(name: string, playerAttribute: { type: string; idle: string; attack: string; hit: string; special: string; run: string } , playerClass: string, hp: number, atk: number, dodge: number) {
     this.name = name;
+    this.playerAttribute = playerAttribute;
     this.playerClass = playerClass;
     this.hp = hp;
     this.atk = atk;
