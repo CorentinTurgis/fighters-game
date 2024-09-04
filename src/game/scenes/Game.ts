@@ -3,7 +3,8 @@ import { GameObjects, Scene } from 'phaser';
 import { EventBus } from '../EventBus';
 import { Player } from '../Player/Player.class';
 import { FightTurn } from '../models/Fight.model';
-import { switchMap, tap, timer } from 'rxjs';
+import { tap } from 'rxjs';
+import { animateTurn } from '../utils/fight.utils';
 
 export type ListOfAnimationKey = 'attack' | 'special' | 'hit' | 'run';
 export const fight: FightTurn[] = [
@@ -45,8 +46,8 @@ export class Game extends Scene {
   background: GameObjects.Image;
   logo: GameObjects.Image;
   title: GameObjects.Text;
-  Bob: Player = new Player('Bob', 'assassin', 20, 2, 0.1);
-  Alice: Player = new Player('Alice', 'assassin', 21, 2, 1);
+  p1: Player = new Player('Bob', 'assassin', 20, 2, 0.1);
+  p2: Player = new Player('Alice', 'assassin', 21, 2, 1);
   isTurnEnded: boolean = true;
   fight: FightTurn[] = fight;
   currentTurn: FightTurn | undefined = this.fight[0];
@@ -56,21 +57,21 @@ export class Game extends Scene {
   }
 
   preload() {
-    this.Bob.sprite = new Phaser.GameObjects.Sprite(this, 200, 300, 'assassin_idle').setScale(4);
-    this.Alice.sprite = new Phaser.GameObjects.Sprite(this, 200, 300, 'assassin_idle').setScale(4);
+    this.p1.sprite = new Phaser.GameObjects.Sprite(this, 200, 600, 'assassin_idle').setScale(4);
+    this.p2.sprite = new Phaser.GameObjects.Sprite(this, 800, 500, 'assassin_idle').setScale(4);
   }
 
   create() {
-    this.background = this.add.image(512, 384, 'background');
-    this.title = this.add.text(512, 100, 'FIGHT', {
-      fontFamily: 'Arial Black', fontSize: 38, color: '#ffffff',
-      stroke: '#000000', strokeThickness: 8,
+    this.background = this.add.image(500, 400, 'background');
+    this.title = this.add.text(506, 215, 'FIGHT', {
+      fontFamily: 'Arial Black', fontSize: 38, color: 'red',
+      stroke: 'yellow', strokeThickness: 8,
       align: 'center',
     }).setOrigin(0.5).setDepth(100);
 
-    this.Bob.setSprite(this.add.sprite(200, 300, 'assassin_idle').setScale(4));
-    this.Alice.setSprite(this.add.sprite(600, 300, 'assassin_idle').setScale(4));
-    this.Alice.sprite.setFlipX(true);
+    this.p1.setSprite(this.add.sprite(200, 500, 'assassin_idle').setScale(4));
+    this.p2.setSprite(this.add.sprite(800, 500, 'assassin_idle').setScale(4));
+    this.p2.sprite.setFlipX(true);
 
     EventBus.emit('current-scene-ready', { scene: this });
   }
@@ -80,28 +81,13 @@ export class Game extends Scene {
 
     if (this.currentTurn && this.isTurnEnded) {
       this.isTurnEnded = false;
-      const { opponentName, attackerName } = this.currentTurn;
-
-      this.getPlayerByName(attackerName).attack()
-        .pipe(
-          switchMap(() => {
-            return this.getPlayerByName(opponentName).takeHit(this.currentTurn);
-          }),
-          switchMap(() => {
-            this.fight.shift();
-            return timer(2000).pipe(
-              tap(() => {
-                this.isTurnEnded = true;
-                this.currentTurn = this.fight[0];
-              })
-            )
-          })
-        ).subscribe();
+      animateTurn(this.currentTurn, this.p1, this.p2).pipe(
+        tap(() => {
+          this.fight.shift();
+          this.isTurnEnded = true;
+          this.currentTurn = this.fight[0];
+        })
+      ).subscribe();
     }
-  }
-
-  getPlayerByName(name: string): Player {
-    return this.Bob.name === name ? this.Bob
-      : this.Alice;
   }
 }
