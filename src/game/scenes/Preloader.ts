@@ -49,28 +49,28 @@ export class Preloader extends Scene {
       key: 'attack',
       frames: this.anims.generateFrameNumbers('assassin_attack', { start: 0, end: 4 }),
       frameRate: 6,
-      repeat: -1,
+      repeat: 1,
     });
 
     this.anims.create({
       key: 'special',
       frames: this.anims.generateFrameNumbers('assassin_special', { start: 0, end: 4 }),
       frameRate: 6,
-      repeat: -1,
+      repeat: 1,
     });
 
     this.anims.create({
       key: 'hit',
       frames: this.anims.generateFrameNumbers('assassin_hit', { start: 0, end: 2 }),
       frameRate: 6,
-      repeat: -1,
+      repeat: 1,
     });
 
     this.anims.create({
       key: 'run',
       frames: this.anims.generateFrameNumbers('assassin_run', { start: 0, end: 3 }),
       frameRate: 6,
-      repeat: -1,
+      repeat: 1,
     });
     this.scene.start('MainMenu');
   }
