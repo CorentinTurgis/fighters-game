@@ -1,6 +1,6 @@
 import { GameObjects } from 'phaser';
 import { FightTurn } from '../models/Fight.model';
-import { Observable, of, switchMap, tap, timer } from 'rxjs';
+import { Observable, of, tap, timer } from 'rxjs';
 import { ListOfAnimationKey } from '../models/ListOfAnimationKey.type';
 
 export type PlayerClass = 'assassin' | 'mage' | 'sherif'
@@ -23,11 +23,15 @@ export class Player {
     this.dodge = dodge;
   }
 
-  #animate(player: Player, animationKey: ListOfAnimationKey): Observable<0> {
-    player.playerState = animationKey;
-    player.sprite.anims.play(animationKey);
+  #animate(player: Player, smallAnimationKey: ListOfAnimationKey): Observable<0> {
+    player.playerState = smallAnimationKey;
+    player.sprite.anims.play(player.animationKey);
 
     return timer(player.sprite.anims.duration + 1000);
+  }
+
+  get animationKey() {
+    return this.playerClass + '-' + this.playerState;
   }
 
   setSprite(sprite: GameObjects.Sprite): void {

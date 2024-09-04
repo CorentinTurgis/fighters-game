@@ -47,7 +47,7 @@ export class Game extends Scene {
   logo: GameObjects.Image;
   title: GameObjects.Text;
   p1: Player = new Player('Bob', 'assassin', 20, 2, 0.1);
-  p2: Player = new Player('Alice', 'assassin', 21, 2, 1);
+  p2: Player = new Player('Alice', 'mage', 21, 2, 1);
   isTurnEnded: boolean = true;
   fight: FightTurn[] = fight;
   currentTurn: FightTurn | undefined = this.fight[0];
@@ -57,8 +57,8 @@ export class Game extends Scene {
   }
 
   preload() {
-    this.p1.sprite = new Phaser.GameObjects.Sprite(this, 200, 600, 'assassin_idle').setScale(4);
-    this.p2.sprite = new Phaser.GameObjects.Sprite(this, 800, 500, 'assassin_idle').setScale(4);
+    this.p1.sprite = new Phaser.GameObjects.Sprite(this, 200, 600, this.p1.animationKey).setScale(4);
+    this.p2.sprite = new Phaser.GameObjects.Sprite(this, 800, 600, this.p2.animationKey).setScale(4);
   }
 
   create() {
@@ -69,8 +69,8 @@ export class Game extends Scene {
       align: 'center',
     }).setOrigin(0.5).setDepth(100);
 
-    this.p1.setSprite(this.add.sprite(200, 500, 'assassin_idle').setScale(4));
-    this.p2.setSprite(this.add.sprite(800, 500, 'assassin_idle').setScale(4));
+    this.p1.setSprite(this.add.sprite(200, 600, this.p1.animationKey).setScale(4));
+    this.p2.setSprite(this.add.sprite(800, 600, this.p2.animationKey).setScale(4));
     this.p2.sprite.setFlipX(true);
 
     EventBus.emit('current-scene-ready', { scene: this });

@@ -32,34 +32,33 @@ export class Preloader extends Scene {
     this.#createAssassinSprites();
     this.#createMageSprites();
     this.#createSherifSprites();
-    this.#createAssassinSprites();
     this.scene.start('MainMenu');
   }
 
   #createAssassinSprites() {
     this.anims.create({
-      key: 'attack',
+      key: 'assassin-attack',
       frames: this.anims.generateFrameNumbers('assassin-attack', { start: 0, end: 4 }),
       frameRate: 6,
       repeat: 1,
     });
 
     this.anims.create({
-      key: 'special',
+      key: 'assassin-special',
       frames: this.anims.generateFrameNumbers('assassin-special', { start: 0, end: 4 }),
       frameRate: 6,
       repeat: 1,
     });
 
     this.anims.create({
-      key: 'hit',
+      key: 'assassin-hit',
       frames: this.anims.generateFrameNumbers('assassin-hit', { start: 0, end: 2 }),
       frameRate: 6,
       repeat: 1,
     });
 
     this.anims.create({
-      key: 'run',
+      key: 'assassin-run',
       frames: this.anims.generateFrameNumbers('assassin-run', { start: 0, end: 3 }),
       frameRate: 6,
       repeat: 1,
@@ -69,7 +68,7 @@ export class Preloader extends Scene {
   #loadAssassinSprites() {
     this.load.setPath('../assets/assassin');
 
-    this.load.image('assassin_idle', 'assassin-idle.png');
+    this.load.image('assassin-idle', 'assassin-idle.png');
     this.load.spritesheet('assassin-attack', 'assassin-attack.png', {
       frameWidth: 32,
       frameHeight: 32,
@@ -78,7 +77,7 @@ export class Preloader extends Scene {
       frameWidth: 32,
       frameHeight: 32,
     });
-    this.load.spritesheet('assassin_hit', 'assassin-hit.png', {
+    this.load.spritesheet('assassin-hit', 'assassin-hit.png', {
       frameWidth: 32,
       frameHeight: 32,
     });
@@ -90,29 +89,29 @@ export class Preloader extends Scene {
 
   #createMageSprites() {
     this.anims.create({
-      key: 'attack',
+      key: 'mage-attack',
       frames: this.anims.generateFrameNumbers('mage-attack', { start: 0, end: 4 }),
       frameRate: 6,
       repeat: 1,
     });
 
     this.anims.create({
-      key: 'special',
+      key: 'mage-special',
       frames: this.anims.generateFrameNumbers('mage-special', { start: 0, end: 4 }),
       frameRate: 6,
       repeat: 1,
     });
 
     this.anims.create({
-      key: 'hit',
+      key: 'mage-hit',
       frames: this.anims.generateFrameNumbers('mage-hit', { start: 0, end: 2 }),
       frameRate: 6,
       repeat: 1,
     });
 
     this.anims.create({
-      key: 'run',
-      frames: this.anims.generateFrameNumbers('assassin-run', { start: 0, end: 3 }),
+      key: 'mage-run',
+      frames: this.anims.generateFrameNumbers('mage-run', { start: 0, end: 3 }),
       frameRate: 6,
       repeat: 1,
     });
@@ -142,29 +141,29 @@ export class Preloader extends Scene {
 
   #createSherifSprites() {
     this.anims.create({
-      key: 'attack',
-      frames: this.anims.generateFrameNumbers('sherif-attack', { start: 0, end: 4 }),
+      key: 'sherif-attack',
+      frames: this.anims.generateFrameNumbers('sherif-attack', { start: 0, end: 8 }),
       frameRate: 6,
       repeat: 1,
     });
 
     this.anims.create({
-      key: 'special',
-      frames: this.anims.generateFrameNumbers('sherif-special', { start: 0, end: 4 }),
+      key: 'sherif-special',
+      frames: this.anims.generateFrameNumbers('sherif-special', { start: 0, end: 8 }),
       frameRate: 6,
       repeat: 1,
     });
 
     this.anims.create({
-      key: 'hit',
-      frames: this.anims.generateFrameNumbers('sherif-hit', { start: 0, end: 2 }),
+      key: 'sherif-hit',
+      frames: this.anims.generateFrameNumbers('sherif-hit', { start: 0, end: 4 }),
       frameRate: 6,
       repeat: 1,
     });
 
     this.anims.create({
-      key: 'run',
-      frames: this.anims.generateFrameNumbers('sherif-run', { start: 0, end: 3 }),
+      key: 'sherif-run',
+      frames: this.anims.generateFrameNumbers('sherif-run', { start: 0, end: 8 }),
       frameRate: 6,
       repeat: 1,
     });
@@ -174,7 +173,7 @@ export class Preloader extends Scene {
     this.load.setPath('../assets/sherif');
 
     this.load.image('sherif-idle', 'sherif-idle.png');
-    this.load.spritesheet('sherif_attack', 'sherif-attack.png', {
+    this.load.spritesheet('sherif-attack', 'sherif-attack.png', {
       frameWidth: 32,
       frameHeight: 32,
     });
