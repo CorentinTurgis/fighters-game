@@ -29,11 +29,12 @@ export class Preloader extends Scene {
     //  When all the assets have loaded, it's often worth creating global objects here that the rest of the game can use.
     //  For example, you can define global animations here, so we can use them in other scenes.
 
-    this.#createAssassinSprites()
-    this.#createMageSprites()
-    this.#createSherifSprites()
+    this.#createAssassinSprites();
+    this.#createMageSprites();
+    this.#createSherifSprites();
     this.scene.start('MainMenu');
   }
+
   #createAssassinSprites() {
     this.anims.create({
       key: 'attack',
@@ -63,6 +64,7 @@ export class Preloader extends Scene {
       repeat: 1,
     });
   }
+
   #loadAssassinSprites() {
     this.load.setPath('../assets/assassin');
 
@@ -84,6 +86,7 @@ export class Preloader extends Scene {
       frameHeight: 32,
     });
   }
+
   #createMageSprites() {
     this.anims.create({
       key: 'attack',
@@ -113,6 +116,7 @@ export class Preloader extends Scene {
       repeat: 1,
     });
   }
+
   #loadMageSprites() {
     this.load.setPath('../assets/mage');
 
@@ -134,6 +138,7 @@ export class Preloader extends Scene {
       frameHeight: 32,
     });
   }
+
   #createSherifSprites() {
     this.anims.create({
       key: 'attack',
@@ -163,6 +168,7 @@ export class Preloader extends Scene {
       repeat: 1,
     });
   }
+
   #loadSherifSprites() {
     this.load.setPath('../assets/sherif');
 

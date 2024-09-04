@@ -1,27 +1,30 @@
 import { GameObjects } from 'phaser';
 import { FightTurn } from '../models/Fight.model';
-import { ListOfAnimationKey } from '../scenes/Game';
-import { Observable, of, tap, timer } from 'rxjs';
+import { Observable, of, switchMap, tap, timer } from 'rxjs';
+import { ListOfAnimationKey } from '../models/ListOfAnimationKey.type';
+
+export type PlayerClass = 'assassin' | 'mage' | 'sherif'
 
 export class Player {
   sprite: GameObjects.Sprite;
   name: string;
-  playerAttribute: { type: string; idle: string; attack: string; hit: string; special: string; run: string };
-  playerClass: string;
+  playerClass: PlayerClass;
+  playerState: ListOfAnimationKey;
   hp: number;
   atk: number;
   dodge: number;
 
-  constructor(name: string, playerAttribute: { type: string; idle: string; attack: string; hit: string; special: string; run: string } , playerClass: string, hp: number, atk: number, dodge: number) {
+  constructor(name: string, playerClass: PlayerClass, hp: number, atk: number, dodge: number) {
     this.name = name;
-    this.playerAttribute = playerAttribute;
     this.playerClass = playerClass;
+    this.playerState = 'idle';
     this.hp = hp;
     this.atk = atk;
     this.dodge = dodge;
   }
 
   #animate(player: Player, animationKey: ListOfAnimationKey): Observable<0> {
+    player.playerState = animationKey;
     player.sprite.anims.play(animationKey);
 
     return timer(player.sprite.anims.duration + 1000);
@@ -36,18 +39,13 @@ export class Player {
   }
 
   attack(): Observable<0> {
-    console.log('BEFORE RUN');
     return this.#animate(this, 'run').pipe(
-      tap(() => {
-        console.log('After run : attack');
-        this.#animate(this, 'attack');
-      }),
+      tap(() => this.#animate(this, 'attack')),
     )
   }
 
   takeHit(currentTurn?: FightTurn): Observable<0> {
     if (currentTurn && currentTurn.isHit) {
-      console.log('outch');
       this.hp -= currentTurn.opponentHp;
       return this.#animate(this, 'hit');
     }

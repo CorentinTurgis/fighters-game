@@ -1,0 +1,1 @@
+export type ListOfAnimationKey = 'attack' | 'special' | 'hit' | 'run' | 'idle';
