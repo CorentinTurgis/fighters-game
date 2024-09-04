@@ -20,31 +20,17 @@ export class Preloader extends Scene {
 
   preload() {
     //  Load the assets for the game
-    this.load.setPath('../assets');
-
-    this.load.image('assassin_idle', 'assassin/assassin_idle.png');
-    this.load.spritesheet('assassin_attack', 'assassin/assassin_attack.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.spritesheet('assassin_special', 'assassin/assassin_special.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.spritesheet('assassin_hit', 'assassin/assassin_hit.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.spritesheet('assassin_run', 'assassin/assassin_run.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
+    this.#loadAssassinSprites();
   }
 
   create() {
     //  When all the assets have loaded, it's often worth creating global objects here that the rest of the game can use.
     //  For example, you can define global animations here, so we can use them in other scenes.
 
+    this.#createAssassinSprites()
+    this.scene.start('MainMenu');
+  }
+  #createAssassinSprites() {
     this.anims.create({
       key: 'attack',
       frames: this.anims.generateFrameNumbers('assassin_attack', { start: 0, end: 4 }),
@@ -72,6 +58,26 @@ export class Preloader extends Scene {
       frameRate: 6,
       repeat: 1,
     });
-    this.scene.start('MainMenu');
+  }
+  #loadAssassinSprites() {
+    this.load.setPath('../assets/assassin');
+
+    this.load.image('assassin_idle', 'assassin_idle.png');
+    this.load.spritesheet('assassin_attack', 'assassin_attack.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet('assassin_special', 'assassin_special.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet('assassin_hit', 'assassin_hit.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet('assassin_run', 'assassin_run.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
   }
 }
