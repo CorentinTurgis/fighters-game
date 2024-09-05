@@ -39,16 +39,18 @@ export class Player {
   #animate$(smallAnimationKey: ListOfAnimationKey): Observable<0> {
     this.isAnimationEnded = false;
     this.playerState = smallAnimationKey;
-    this.sprite.anims.play(this.animationKey);
+    if (this.sprite.anims) {
+      this.sprite.anims.play(this.animationKey);
 
-    const currentAnim = this.sprite.anims.currentAnim;
-    console.log(currentAnim);
-    if (currentAnim) {
-      const { duration } = currentAnim;
+      const currentAnim = this.sprite.anims.currentAnim;
+      console.log(currentAnim);
+      if (currentAnim) {
+        const { duration } = currentAnim;
 
-      return timer(duration).pipe(
-        tap(() => this.isAnimationEnded = true),
-      );
+        return timer(duration).pipe(
+          tap(() => this.isAnimationEnded = true),
+        );
+      }
     }
     return of(0);
   }
@@ -81,7 +83,7 @@ export class Player {
       concatMap(() =>
         combineLatest([
           this.#animate$('attack'),
-          currentTurn.isHit ? opponent.#takeHit$(currentTurn) : of(0),
+          currentTurn.isHit ? opponent.#takeHit$(opponent, currentTurn) : of(0),
         ])),
       tap(() => this.sprite.x = this.dir === 'r' ? 200 : 800),
       concatMap(() => this.#animate$('idle').pipe(
@@ -90,9 +92,9 @@ export class Player {
     );
   }
 
-  #takeHit$(currentTurn: FightTurn): Observable<0> {
+  #takeHit$(opponent: Player, currentTurn: FightTurn): Observable<0> {
     if (currentTurn && currentTurn.isHit) {
-      this.hp -= currentTurn.opponentHp;
+      opponent.hp = currentTurn.opponentHp;
       return this.#animate$('hit').pipe(
         concatMap(() => this.#animate$('idle')),
       );

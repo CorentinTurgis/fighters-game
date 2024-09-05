@@ -11,7 +11,7 @@ export class Game extends Scene {
   background: GameObjects.Image;
   logo: GameObjects.Image;
   title: GameObjects.Text;
-  p1: Player = new Player('Bob', 'sherif', 'r', 20, 2, 0.1);
+  p1: Player = new Player('Bob', 'assassin', 'r', 20, 2, 0.1);
   p2: Player = new Player('Alice', 'mage', 'l', 21, 2, 1);
   isTurnEnded: boolean = true;
   fight: FightTurn[] = [];
@@ -71,6 +71,11 @@ export class Game extends Scene {
           })
         )
         .subscribe();
+    } else {
+      if (this.p1.hp <= 0)
+        this.scene.start('GameOver');
+      else if (this.p2.hp <= 0)
+        this.scene.start('Win');
     }
   }
 }
