@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "scripts": {
         "ng": "ng",
-        "dev": "ng serve",
+        "generate-fight": "node back-script.js",
+        "dev": "npm run generate-fight && ng serve",
         "build": "ng build --base-href='./'"
     },
     "dependencies": {

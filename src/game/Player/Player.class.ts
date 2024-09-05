@@ -72,7 +72,7 @@ export class Player {
   #run$(currentTurn: FightTurn): Observable<any> {
     return combineLatest([
       this.#animate$('run'),
-      this.#move$(currentTurn.isHit ? 10 : 5),
+      this.#move$(currentTurn.isHit ? 11 : 9),
     ]);
   }
 
