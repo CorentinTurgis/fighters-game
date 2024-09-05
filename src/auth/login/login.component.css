@@ -1,0 +1,39 @@
+div.login-container {
+    width: 30vw;
+    background: #0000008f;
+    padding: 48px;
+    padding-top: 32px;
+    border-radius: 0 0 8px 8px;
+    border-top: 4px solid #00000095;
+}
+
+div h2 {
+    font-size: 30px;
+    margin: 0;
+    margin-bottom: 12px; 
+}
+
+div form {
+
+}
+
+div form div {
+    display: flex;
+    font-size: 16px;
+    flex-direction: column;
+}
+
+form div label {
+    padding: 8px 0;
+}
+
+form div input {
+    padding: 8px 4px;
+}
+
+form button {
+    width: -webkit-fill-available;
+    padding: 8px 4px;
+    margin-top: 16px;
+    font-family: "VT323", monospace;
+}

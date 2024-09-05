@@ -1,0 +1,7 @@
+div.logout-container {
+    width: 30vw;
+    background: #0000008f;
+    padding: 16px;
+    border-radius: 0 0 8px 8px;
+    border-top: 4px solid #00000095;
+}

@@ -1,0 +1,24 @@
+nav {
+    background: #0000008f;
+    padding: 16px 32px;
+    border-radius: 8px 8px 0 0;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    list-style: none;
+}
+
+nav ul li {
+    padding: 0 4px;
+}
+
+
+
+ul li a {
+    text-decoration: none;
+    color: white;
+}
