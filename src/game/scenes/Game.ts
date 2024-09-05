@@ -46,8 +46,8 @@ export class Game extends Scene {
   background: GameObjects.Image;
   logo: GameObjects.Image;
   title: GameObjects.Text;
-  p1: Player = new Player('Bob', 'assassin', 20, 2, 0.1);
-  p2: Player = new Player('Alice', 'mage', 21, 2, 1);
+  p1: Player = new Player('Bob', 'sherif', 20, 2, 0.1);
+  p2: Player = new Player('Alice', 'sherif', 21, 2, 1);
   isTurnEnded: boolean = true;
   fight: FightTurn[] = fight;
   currentTurn: FightTurn | undefined = this.fight[0];

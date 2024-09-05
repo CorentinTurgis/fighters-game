@@ -97,7 +97,7 @@ export class Preloader extends Scene {
 
     this.anims.create({
       key: 'mage-special',
-      frames: this.anims.generateFrameNumbers('mage-special', { start: 0, end: 4 }),
+      frames: this.anims.generateFrameNumbers('mage-special', { start: 0, end: 3 }),
       frameRate: 6,
       repeat: 1,
     });
@@ -122,7 +122,7 @@ export class Preloader extends Scene {
 
     this.load.image('mage-idle', 'mage-idle.png');
     this.load.spritesheet('mage-attack', 'mage-attack.png', {
-      frameWidth: 32,
+      frameWidth: 42,
       frameHeight: 32,
     });
     this.load.spritesheet('mage-special', 'mage-special.png', {
@@ -142,28 +142,28 @@ export class Preloader extends Scene {
   #createSherifSprites() {
     this.anims.create({
       key: 'sherif-attack',
-      frames: this.anims.generateFrameNumbers('sherif-attack', { start: 0, end: 8 }),
+      frames: this.anims.generateFrameNumbers('sherif-attack', { start: 0, end: 7 }),
       frameRate: 6,
       repeat: 1,
     });
 
     this.anims.create({
       key: 'sherif-special',
-      frames: this.anims.generateFrameNumbers('sherif-special', { start: 0, end: 8 }),
+      frames: this.anims.generateFrameNumbers('sherif-special', { start: 0, end: 7 }),
       frameRate: 6,
       repeat: 1,
     });
 
     this.anims.create({
       key: 'sherif-hit',
-      frames: this.anims.generateFrameNumbers('sherif-hit', { start: 0, end: 4 }),
+      frames: this.anims.generateFrameNumbers('sherif-hit', { start: 0, end: 3 }),
       frameRate: 6,
       repeat: 1,
     });
 
     this.anims.create({
       key: 'sherif-run',
-      frames: this.anims.generateFrameNumbers('sherif-run', { start: 0, end: 8 }),
+      frames: this.anims.generateFrameNumbers('sherif-run', { start: 0, end: 7 }),
       frameRate: 6,
       repeat: 1,
     });
