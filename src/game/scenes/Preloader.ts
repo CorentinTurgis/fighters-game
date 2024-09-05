@@ -41,6 +41,13 @@ export class Preloader extends Scene {
 
   #createAssassinSprites() {
     this.anims.create({
+      key: 'assassin-idle',
+      frames: this.anims.generateFrameNumbers('assassin-idle', { start: 0, end: 0 }),
+      frameRate: 6,
+      repeat: 1,
+    });
+
+    this.anims.create({
       key: 'assassin-attack',
       frames: this.anims.generateFrameNumbers('assassin-attack', { start: 0, end: 4 }),
       frameRate: 6,
@@ -72,7 +79,10 @@ export class Preloader extends Scene {
   #loadAssassinSprites() {
     this.load.setPath('../assets/assassin');
 
-    this.load.image('assassin-idle', 'assassin-idle.png');
+    this.load.spritesheet('assassin-idle', 'assassin-idle.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
     this.load.spritesheet('assassin-attack', 'assassin-attack.png', {
       frameWidth: 32,
       frameHeight: 32,
@@ -92,10 +102,18 @@ export class Preloader extends Scene {
   }
 
   #createMageSprites() {
+
+    this.anims.create({
+      key: 'mage-idle',
+      frames: this.anims.generateFrameNumbers('mage-idle', { start: 0, end: 0 }),
+      frameRate: 6,
+      repeat: 1,
+    });
+
     this.anims.create({
       key: 'mage-attack',
       frames: this.anims.generateFrameNumbers('mage-attack', { start: 0, end: 4 }),
-      frameRate: 6,
+      frameRate: 16,
       repeat: 1,
     });
 
@@ -109,7 +127,7 @@ export class Preloader extends Scene {
     this.anims.create({
       key: 'mage-hit',
       frames: this.anims.generateFrameNumbers('mage-hit', { start: 0, end: 2 }),
-      frameRate: 6,
+      frameRate: 1,
       repeat: 1,
     });
 
@@ -124,9 +142,12 @@ export class Preloader extends Scene {
   #loadMageSprites() {
     this.load.setPath('../assets/mage');
 
-    this.load.image('mage-idle', 'mage-idle.png');
+    this.load.spritesheet('mage-idle', 'mage-idle.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
     this.load.spritesheet('mage-attack', 'mage-attack.png', {
-      frameWidth: 42,
+      frameWidth: 32,
       frameHeight: 32,
     });
     this.load.spritesheet('mage-special', 'mage-special.png', {
@@ -145,9 +166,15 @@ export class Preloader extends Scene {
 
   #createSherifSprites() {
     this.anims.create({
+      key: 'sherif-idle',
+      frames: this.anims.generateFrameNumbers('sherif-idle', { start: 0, end: 0 }),
+      frameRate: 6,
+      repeat: 1,
+    });
+    this.anims.create({
       key: 'sherif-attack',
       frames: this.anims.generateFrameNumbers('sherif-attack', { start: 0, end: 7 }),
-      frameRate: 6,
+      frameRate: 16,
       repeat: 1,
     });
 
@@ -161,7 +188,7 @@ export class Preloader extends Scene {
     this.anims.create({
       key: 'sherif-hit',
       frames: this.anims.generateFrameNumbers('sherif-hit', { start: 0, end: 3 }),
-      frameRate: 6,
+      frameRate: 1,
       repeat: 1,
     });
 
@@ -176,9 +203,12 @@ export class Preloader extends Scene {
   #loadSherifSprites() {
     this.load.setPath('../assets/sherif');
 
-    this.load.image('sherif-idle', 'sherif-idle.png');
-    this.load.spritesheet('sherif-attack', 'sherif-attack.png', {
+    this.load.spritesheet('sherif-idle', 'sherif-idle.png', {
       frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet('sherif-attack', 'sherif-attack.png', {
+      frameWidth: 42,
       frameHeight: 32,
     });
     this.load.spritesheet('sherif-special', 'sherif-special.png', {

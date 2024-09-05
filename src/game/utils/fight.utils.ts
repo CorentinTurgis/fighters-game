@@ -1,6 +1,5 @@
 import { FightTurn } from '../models/Fight.model';
 import { Player } from '../Player/Player.class';
-import { concatMap, tap } from 'rxjs';
 
 export function animateTurn(turnDetail: FightTurn, p1: Player, p2: Player) {
   const { opponentName, attackerName } = turnDetail;
@@ -13,13 +12,7 @@ export function animateTurn(turnDetail: FightTurn, p1: Player, p2: Player) {
 
   console.log('before attack');
 
-  return attacker.attack$(opponent, turnDetail.isHit).pipe(
-    concatMap(() => {
-      console.log('Attack completed, now processing the opponent\'s reaction');
-      return opponent.takeHit$(turnDetail);
-    }),
-    tap(() => console.log('Turn finished')),
-  );
+  return attacker.attack$(opponent, turnDetail.isHit);
 }
 
 export function getPlayerByName(name: string, p1: Player, p2: Player): Player | null {
