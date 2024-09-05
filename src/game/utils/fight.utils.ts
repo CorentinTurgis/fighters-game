@@ -1,6 +1,6 @@
-import { switchMap, timer } from 'rxjs';
 import { FightTurn } from '../models/Fight.model';
 import { Player } from '../Player/Player.class';
+import { take, tap } from 'rxjs';
 
 export function animateTurn(turnDetail: FightTurn, p1: Player, p2: Player) {
   const { opponentName, attackerName } = turnDetail;
@@ -11,12 +11,11 @@ export function animateTurn(turnDetail: FightTurn, p1: Player, p2: Player) {
     throw new Error(`Invalid opponent or attacker name: ${opponentName} ${attackerName}`);
   }
 
-  return attacker.attack$(opponent, turnDetail.isHit)
-    .pipe(
-      switchMap(() => {
-        return timer(2000);
-      }),
-    );
+  console.log('before attack');
+
+  return attacker.attack$(opponent, turnDetail.isHit).pipe(
+    tap(x => console.log('test')),
+  );
 }
 
 export function getPlayerByName(name: string, p1: Player, p2: Player): Player | null {

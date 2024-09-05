@@ -1,6 +1,6 @@
 import { GameObjects } from 'phaser';
 import { FightTurn } from '../models/Fight.model';
-import { combineLatest, interval, Observable, of, switchMap, take, tap, timer } from 'rxjs';
+import { combineLatest, interval, last, Observable, of, switchMap, take, takeUntil, tap, timer } from 'rxjs';
 import { ListOfAnimationKey } from '../models/ListOfAnimationKey.type';
 
 export type PlayerClass = 'assassin' | 'mage' | 'sherif'
@@ -10,6 +10,7 @@ export class Player {
   name: string;
   playerClass: PlayerClass;
   playerState: ListOfAnimationKey;
+  isAnimationEnded: boolean = false;
   dir: 'r' | 'l';
   hp: number;
   atk: number;
@@ -25,22 +26,21 @@ export class Player {
     this.dir = dir;
   }
 
-  #animate$(smallAnimationKey: ListOfAnimationKey): Observable<0> {
+  #animate$(smallAnimationKey: ListOfAnimationKey) {
+    console.log(smallAnimationKey)
+    this.isAnimationEnded = false;
     this.playerState = smallAnimationKey;
     this.sprite.anims.play(this.animationKey);
-    const frameNumber = this.sprite.anims.getTotalFrames();
-    const frameTime = this.sprite.anims.msPerFrame;
 
-    return timer(frameNumber * frameTime);
+    return timer(2000);
   }
 
   #move$(delta: number) {
-    return interval(100).pipe(
-      take(25),
-      tap(() => {
-        this.sprite.x += this.dir === 'r' ? delta : -delta;
-      }),
-    );
+    return interval(10).pipe(
+      take(50),
+      tap(() => this.sprite.x += this.dir === 'r' ? delta : -delta),
+      last(),
+    )
   }
 
   get animationKey() {
@@ -54,7 +54,7 @@ export class Player {
   #run$(): any {
     return combineLatest([
         this.#animate$('run'),
-        this.#move$(20),
+        this.#move$(10),
       ],
     );
   }
@@ -62,17 +62,19 @@ export class Player {
   attack$(opponent: Player, isHit: boolean): Observable<0> {
     return this.#run$().pipe(
       switchMap(() => this.#animate$('attack')),
-      switchMap(() => isHit ? opponent.#animate$('hit') : of(0)),
+      switchMap(() => {
+        return isHit ? opponent.#animate$('hit') : of(0);
+      }),
       tap(() => this.sprite.x = this.dir === 'r' ? 200 : 800),
       switchMap(() => this.#animate$('idle')),
     );
   }
 
-  takeHit$(currentTurn?: FightTurn): Observable<0> {
+  takeHit$(currentTurn?: FightTurn) {
     if (currentTurn && currentTurn.isHit) {
       this.hp -= currentTurn.opponentHp;
       return this.#animate$('hit');
     }
-    return of(0);
+    return of(true);
   }
 }
