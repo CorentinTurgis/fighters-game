@@ -112,7 +112,7 @@ export class Preloader extends Scene {
 
     this.anims.create({
       key: 'mage-attack',
-      frames: this.anims.generateFrameNumbers('mage-attack', { start: 0, end: 4 }),
+      frames: this.anims.generateFrameNumbers('mage-attack', { start: 0, end: 6 }),
       frameRate: 16,
       repeat: 1,
     });
@@ -133,7 +133,7 @@ export class Preloader extends Scene {
 
     this.anims.create({
       key: 'mage-run',
-      frames: this.anims.generateFrameNumbers('mage-run', { start: 0, end: 3 }),
+      frames: this.anims.generateFrameNumbers('mage-run', { start: 0, end: 7 }),
       frameRate: 6,
       repeat: 1,
     });
