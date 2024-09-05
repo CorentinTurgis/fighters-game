@@ -1,5 +1,4 @@
 import { GameObjects, Scene } from 'phaser';
-
 import { EventBus } from '../EventBus';
 import { Player } from '../Player/Player.class';
 import { FightTurn } from '../models/Fight.model';
@@ -46,8 +45,8 @@ export class Game extends Scene {
   background: GameObjects.Image;
   logo: GameObjects.Image;
   title: GameObjects.Text;
-  p1: Player = new Player('Bob', 'sherif', 20, 2, 0.1);
-  p2: Player = new Player('Alice', 'sherif', 21, 2, 1);
+  p1: Player = new Player('Bob', 'mage', 'r', 20, 2, 0.1);
+  p2: Player = new Player('Alice', 'sherif', 'l', 21, 2, 1);
   isTurnEnded: boolean = true;
   fight: FightTurn[] = fight;
   currentTurn: FightTurn | undefined = this.fight[0];
@@ -75,8 +74,11 @@ export class Game extends Scene {
 
     this.background = this.add.image(500, 400, randomBackground);
     this.title = this.add.text(506, 215, 'FIGHT', {
-      fontFamily: 'Arial Black', fontSize: 38, color: 'red',
-      stroke: 'yellow', strokeThickness: 8,
+      fontFamily: 'Arial Black',
+      fontSize: 38,
+      color: 'red',
+      stroke: 'yellow',
+      strokeThickness: 8,
       align: 'center',
     }).setOrigin(0.5).setDepth(100);
 
@@ -92,6 +94,7 @@ export class Game extends Scene {
 
     if (this.currentTurn && this.isTurnEnded) {
       this.isTurnEnded = false;
+
       animateTurn(this.currentTurn, this.p1, this.p2).pipe(
         tap(() => {
           this.fight.shift();

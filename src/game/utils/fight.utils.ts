@@ -11,11 +11,8 @@ export function animateTurn(turnDetail: FightTurn, p1: Player, p2: Player) {
     throw new Error(`Invalid opponent or attacker name: ${opponentName} ${attackerName}`);
   }
 
-  return attacker.attack()
+  return attacker.attack$(opponent, turnDetail.isHit)
     .pipe(
-      switchMap(() => {
-        return opponent.takeHit(turnDetail);
-      }),
       switchMap(() => {
         return timer(2000);
       }),
