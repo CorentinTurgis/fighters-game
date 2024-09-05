@@ -12,7 +12,7 @@ export function animateTurn(turnDetail: FightTurn, p1: Player, p2: Player) {
 
   console.log('before attack');
 
-  return attacker.attack$(opponent, turnDetail.isHit);
+  return attacker.attack$(opponent, turnDetail);
 }
 
 export function getPlayerByName(name: string, p1: Player, p2: Player): Player | null {
