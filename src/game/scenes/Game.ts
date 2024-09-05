@@ -71,6 +71,11 @@ export class Game extends Scene {
           })
         )
         .subscribe();
+    } else {
+      if (this.p1.hp <= 0)
+        this.scene.start('GameOver');
+      else if (this.p2.hp <= 0)
+        this.scene.start('Win');
     }
   }
 }

@@ -1,5 +1,6 @@
 import { EventBus } from '../EventBus';
 import { Scene } from 'phaser';
+import { tap, timer } from 'rxjs';
 
 export class GameOver extends Scene
 {
@@ -27,10 +28,5 @@ export class GameOver extends Scene
         }).setOrigin(0.5).setDepth(100);
         
         EventBus.emit('current-scene-ready', this);
-    }
-
-    changeScene ()
-    {
-        this.scene.start('MainMenu');
     }
 }

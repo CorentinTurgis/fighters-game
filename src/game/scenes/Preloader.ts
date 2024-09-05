@@ -45,35 +45,30 @@ export class Preloader extends Scene {
       key: 'assassin-idle',
       frames: this.anims.generateFrameNumbers('assassin-idle', { start: 0, end: 0 }),
       frameRate: 6,
-      repeat: 1,
     });
 
     this.anims.create({
       key: 'assassin-attack',
       frames: this.anims.generateFrameNumbers('assassin-attack', { start: 0, end: 4 }),
       frameRate: 6,
-      repeat: 1,
     });
 
     this.anims.create({
       key: 'assassin-special',
       frames: this.anims.generateFrameNumbers('assassin-special', { start: 0, end: 4 }),
       frameRate: 6,
-      repeat: 1,
     });
 
     this.anims.create({
       key: 'assassin-hit',
       frames: this.anims.generateFrameNumbers('assassin-hit', { start: 0, end: 2 }),
       frameRate: 6,
-      repeat: 1,
     });
 
     this.anims.create({
       key: 'assassin-run',
       frames: this.anims.generateFrameNumbers('assassin-run', { start: 0, end: 3 }),
       frameRate: 6,
-      repeat: 1,
     });
   }
 
@@ -104,40 +99,35 @@ export class Preloader extends Scene {
   }
 
   #createMageSprites() {
-
     this.anims.create({
       key: 'mage-idle',
       frames: this.anims.generateFrameNumbers('mage-idle', { start: 0, end: 0 }),
-      frameRate: 6,
-      repeat: 1,
+      frameRate: 50,
+      repeat: 1
     });
 
     this.anims.create({
       key: 'mage-attack',
       frames: this.anims.generateFrameNumbers('mage-attack', { start: 0, end: 6 }),
       frameRate: 16,
-      repeat: 1,
     });
 
     this.anims.create({
       key: 'mage-special',
       frames: this.anims.generateFrameNumbers('mage-special', { start: 0, end: 3 }),
       frameRate: 6,
-      repeat: 1,
     });
 
     this.anims.create({
       key: 'mage-hit',
       frames: this.anims.generateFrameNumbers('mage-hit', { start: 0, end: 2 }),
       frameRate: 6,
-      repeat: 1,
     });
 
     this.anims.create({
       key: 'mage-run',
       frames: this.anims.generateFrameNumbers('mage-run', { start: 0, end: 7 }),
-      frameRate: 6,
-      repeat: 1,
+      frameRate: 14,
     });
   }
 
@@ -171,35 +161,31 @@ export class Preloader extends Scene {
     this.anims.create({
       key: 'sherif-idle',
       frames: this.anims.generateFrameNumbers('sherif-idle', { start: 0, end: 0 }),
-      frameRate: 6,
-      repeat: 1,
+      frameRate: 50,
+      repeat: 1
     });
     this.anims.create({
       key: 'sherif-attack',
       frames: this.anims.generateFrameNumbers('sherif-attack', { start: 0, end: 7 }),
       frameRate: 16,
-      repeat: 1,
     });
 
     this.anims.create({
       key: 'sherif-special',
       frames: this.anims.generateFrameNumbers('sherif-special', { start: 0, end: 7 }),
       frameRate: 6,
-      repeat: 1,
     });
 
     this.anims.create({
       key: 'sherif-hit',
       frames: this.anims.generateFrameNumbers('sherif-hit', { start: 0, end: 3 }),
       frameRate: 6,
-      repeat: 1,
     });
 
     this.anims.create({
       key: 'sherif-run',
       frames: this.anims.generateFrameNumbers('sherif-run', { start: 0, end: 7 }),
       frameRate: 13,
-      repeat: 1,
     });
   }
 
