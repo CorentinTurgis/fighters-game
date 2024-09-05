@@ -6,40 +6,6 @@ import { tap } from 'rxjs';
 import { animateTurn } from '../utils/fight.utils';
 
 export type ListOfAnimationKey = 'attack' | 'special' | 'hit' | 'run';
-export const fight: FightTurn[] = [
-  {
-    attackerName: 'Bob',
-    opponentName: 'Alice',
-    isHit: false,
-    damage: 0,
-    attackerHp: 20,
-    opponentHp: 20,
-  },
-  {
-    attackerName: 'Alice',
-    opponentName: 'Bob',
-    isHit: true,
-    damage: 0,
-    attackerHp: 20,
-    opponentHp: 18,
-  },
-  {
-    attackerName: 'Bob',
-    opponentName: 'Alice',
-    isHit: false,
-    damage: 0,
-    attackerHp: 20,
-    opponentHp: 20,
-  },
-  {
-    attackerName: 'Alice',
-    opponentName: 'Bob',
-    isHit: true,
-    damage: 0,
-    attackerHp: 20,
-    opponentHp: 16,
-  },
-];
 
 export class Game extends Scene {
   background: GameObjects.Image;
@@ -48,7 +14,7 @@ export class Game extends Scene {
   p1: Player = new Player('Bob', 'sherif', 'r', 20, 2, 0.1);
   p2: Player = new Player('Alice', 'mage', 'l', 21, 2, 1);
   isTurnEnded: boolean = true;
-  fight: FightTurn[] = fight;
+  fight: FightTurn[] = [];
   currentTurn: FightTurn | undefined = this.fight[0];
 
   constructor() {
@@ -84,6 +50,8 @@ export class Game extends Scene {
     this.p1.setSprite(this.add.sprite(200, 600, this.p1.animationKey).setScale(4));
     this.p2.setSprite(this.add.sprite(800, 600, this.p2.animationKey).setScale(4));
     this.p2.sprite.setFlipX(true);
+    this.fight = this.cache.json.get('fight1');
+    this.currentTurn = this.fight[0];
 
     EventBus.emit('current-scene-ready', { scene: this });
   }

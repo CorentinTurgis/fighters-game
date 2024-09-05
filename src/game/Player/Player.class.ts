@@ -1,7 +1,17 @@
 import { GameObjects } from 'phaser';
-import { FightTurn } from '../models/Fight.model';
-import { combineLatest, interval, last, Observable, concatMap, of, switchMap, take, takeUntil, tap, timer } from 'rxjs';
+import {
+  combineLatest,
+  interval,
+  last,
+  Observable,
+  concatMap,
+  of,
+  take,
+  tap,
+  timer,
+} from 'rxjs';
 import { ListOfAnimationKey } from '../models/ListOfAnimationKey.type';
+import { FightTurn } from '../models/Fight.model';
 
 export type PlayerClass = 'assassin' | 'mage' | 'sherif'
 
@@ -26,37 +36,27 @@ export class Player {
     this.dir = dir;
   }
 
-  #animate$(smallAnimationKey: ListOfAnimationKey): Observable<void> {
+  #animate$(smallAnimationKey: ListOfAnimationKey): Observable<0> {
     this.isAnimationEnded = false;
     this.playerState = smallAnimationKey;
     this.sprite.anims.play(this.animationKey);
 
     const currentAnim = this.sprite.anims.currentAnim;
+    console.log(currentAnim);
     if (currentAnim) {
-      const totalAnimationDuration = currentAnim.duration;
+      const { duration } = currentAnim;
 
-      return timer(totalAnimationDuration).pipe(
-        tap(() => {
-          this.isAnimationEnded = true;
-        }),
-        switchMap(() => of(void 0)),
+      return timer(duration).pipe(
+        tap(() => this.isAnimationEnded = true),
       );
     }
-
-    return timer(10000).pipe(
-      tap(() => {
-        this.isAnimationEnded = true;
-      }),
-      switchMap(() => of(void 0)),
-    );
+    return of(0);
   }
 
   #move$(delta: number) {
     return interval(10).pipe(
       take(50),
-      tap(() => {
-        this.sprite.x += this.dir === 'r' ? delta : -delta;
-      }),
+      tap(() => this.sprite.x += this.dir === 'r' ? delta : -delta),
       last(),
     );
   }
@@ -69,38 +69,34 @@ export class Player {
     this.sprite = sprite;
   }
 
-  #run$(): Observable<any> {
-    return combineLatest([this.#animate$('run'), this.#move$(10)]);
+  #run$(currentTurn: FightTurn): Observable<any> {
+    return combineLatest([
+      this.#animate$('run'),
+      this.#move$(currentTurn.isHit ? 10 : 5),
+    ]);
   }
 
-  attack$(opponent: Player, isHit: boolean): Observable<any> {
-    return this.#run$().pipe(
-      concatMap(() => this.#animate$('attack')),
-      concatMap(() => {
-        if (isHit) {
-          return opponent.#animate$('hit').pipe(
-            concatMap(() => of(0)),
-          );
-        } else {
-          return of(0);
-        }
-      }),
-      tap(() => {
-        this.sprite.x = this.dir === 'r' ? 200 : 800;
-      }),
+  attack$(opponent: Player, currentTurn: FightTurn): Observable<any> {
+    return this.#run$(currentTurn).pipe(
+      concatMap(() =>
+        combineLatest([
+          this.#animate$('attack'),
+          currentTurn.isHit ? opponent.#takeHit$(currentTurn) : of(0),
+        ])),
+      tap(() => this.sprite.x = this.dir === 'r' ? 200 : 800),
       concatMap(() => this.#animate$('idle').pipe(
         concatMap(() => of(0)),
       )),
     );
   }
 
-  takeHit$(currentTurn?: FightTurn): Observable<boolean> {
+  #takeHit$(currentTurn: FightTurn): Observable<0> {
     if (currentTurn && currentTurn.isHit) {
       this.hp -= currentTurn.opponentHp;
       return this.#animate$('hit').pipe(
-        concatMap(() => of(true)),
+        concatMap(() => this.#animate$('idle')),
       );
     }
-    return of(true);
+    return of(0);
   }
 }

@@ -27,6 +27,7 @@ export class Preloader extends Scene {
     this.#loadAssassinSprites();
     this.#loadMageSprites();
     this.#loadSherifSprites();
+    this.load.json('fight1', 'fight1.json');
   }
 
   create() {
@@ -99,6 +100,7 @@ export class Preloader extends Scene {
       frameWidth: 32,
       frameHeight: 32,
     });
+    this.load.setPath('assets/');
   }
 
   #createMageSprites() {
@@ -127,7 +129,7 @@ export class Preloader extends Scene {
     this.anims.create({
       key: 'mage-hit',
       frames: this.anims.generateFrameNumbers('mage-hit', { start: 0, end: 2 }),
-      frameRate: 1,
+      frameRate: 6,
       repeat: 1,
     });
 
@@ -162,6 +164,7 @@ export class Preloader extends Scene {
       frameWidth: 32,
       frameHeight: 32,
     });
+    this.load.setPath('assets/');
   }
 
   #createSherifSprites() {
@@ -188,14 +191,14 @@ export class Preloader extends Scene {
     this.anims.create({
       key: 'sherif-hit',
       frames: this.anims.generateFrameNumbers('sherif-hit', { start: 0, end: 3 }),
-      frameRate: 1,
+      frameRate: 6,
       repeat: 1,
     });
 
     this.anims.create({
       key: 'sherif-run',
       frames: this.anims.generateFrameNumbers('sherif-run', { start: 0, end: 7 }),
-      frameRate: 6,
+      frameRate: 13,
       repeat: 1,
     });
   }
@@ -223,5 +226,6 @@ export class Preloader extends Scene {
       frameWidth: 32,
       frameHeight: 32,
     });
+    this.load.setPath('assets/');
   }
 }
