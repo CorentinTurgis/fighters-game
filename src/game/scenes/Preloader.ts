@@ -6,8 +6,12 @@ export class Preloader extends Scene {
   }
 
   init() {
+    const backgrounds = ['bgDayNinja', 'bgDayDesert', 'bgNightNinja', 'bgNightDesert', 'bgSky', 'bgPlain'];
+
+    const randomBackground = Phaser.Math.RND.pick(backgrounds);
+
     //  We loaded this image in our Boot Scene, so we can display it here
-    this.add.image(512, 384, 'background');
+    this.add.image(512, 384, randomBackground);
     //  A simple progress bar. This is the outline of the bar.
     this.add.rectangle(512, 384, 468, 32).setStrokeStyle(1, 0xffffff);
 

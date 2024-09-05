@@ -59,10 +59,21 @@ export class Game extends Scene {
   preload() {
     this.p1.sprite = new Phaser.GameObjects.Sprite(this, 200, 600, this.p1.animationKey).setScale(4);
     this.p2.sprite = new Phaser.GameObjects.Sprite(this, 800, 600, this.p2.animationKey).setScale(4);
+    this.load.image('bgDayNinja', 'assets/background/bg-day-ninja.png');
+    this.load.image('bgDayDesert', 'assets/background/bg-day-desert.png');
+    this.load.image('bgNightNinja', 'assets/background/bg-night-ninja.png');
+    this.load.image('bgNightDeser', 'assets/background/bg-night-desert.png');
+    this.load.image('bgSky', 'assets/background/bg-sky.png');
+    this.load.image('bgPlain', 'assets/background/bg-plain.png');
   }
 
   create() {
-    this.background = this.add.image(500, 400, 'background');
+    const backgrounds = ['bgDayNinja', 'bgDayDesert', 'bgNightNinja', 'bgNightDeser', 'bgSky', 'bgPlain'];
+
+    // Sélectionner un background au hasard
+    const randomBackground = Phaser.Math.RND.pick(backgrounds);
+
+    this.background = this.add.image(500, 400, randomBackground);
     this.title = this.add.text(506, 215, 'FIGHT', {
       fontFamily: 'Arial Black', fontSize: 38, color: 'red',
       stroke: 'yellow', strokeThickness: 8,
