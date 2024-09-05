@@ -69,7 +69,6 @@ export class Game extends Scene {
   create() {
     const backgrounds = ['bgDayNinja', 'bgDayDesert', 'bgNightNinja', 'bgNightDeser', 'bgSky', 'bgPlain'];
 
-    // Sélectionner un background au hasard
     const randomBackground = Phaser.Math.RND.pick(backgrounds);
 
     this.background = this.add.image(500, 400, randomBackground);
@@ -91,17 +90,19 @@ export class Game extends Scene {
 
   override update(time: number, delta: number): void {
     super.update(time, delta);
-
+  
     if (this.currentTurn && this.isTurnEnded) {
       this.isTurnEnded = false;
-
-      animateTurn(this.currentTurn, this.p1, this.p2).pipe(
-        tap(() => {
-          this.fight.shift();
-          this.isTurnEnded = true;
-          this.currentTurn = this.fight[0];
-        })
-      ).subscribe();
+  
+      animateTurn(this.currentTurn, this.p1, this.p2)
+        .pipe(
+          tap(() => {
+            this.fight.shift();
+            this.currentTurn = this.fight[0];
+            this.isTurnEnded = true;
+          })
+        )
+        .subscribe();
     }
   }
 }
