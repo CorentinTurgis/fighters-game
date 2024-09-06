@@ -42,7 +42,6 @@ export class Player {// La si on veux se faire vraiment plaisir il faudrait avoi
       this.sprite.anims.play(this.animationKey);
 
       const currentAnim = this.sprite.anims.currentAnim;
-      console.log(currentAnim);
       if (currentAnim && smallAnimationKey !== 'idle') {
         const { duration } = currentAnim;
 

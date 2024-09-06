@@ -48,13 +48,13 @@ export class Preloader extends Scene {
           key: `${className}-${key}`,
           url: `${className}-${key}.png`,
           frameConfig: {
-            frameWidth: `${className}-${key}` !== 'sherif-idle' ? 32 : 42,
+            frameWidth: `${className}-${key}` !== 'sherif-attack' ? 32 : 42,
             frameHeight: 32,
           },
         });
       });
     });
-    this.load.setPath('../assets')
+    this.load.setPath('../assets');
   }
 
   #createAssassinSprites() {
