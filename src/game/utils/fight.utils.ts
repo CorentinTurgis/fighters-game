@@ -3,14 +3,14 @@ import { Player } from '../Player/Player.class';
 
 export function animateTurn(turnDetail: FightTurn, p1: Player, p2: Player) {
   const { opponentName, attackerName } = turnDetail;
+  console.log(`Animating turn: attacker = ${attackerName}, opponent = ${opponentName}`);
+
   const opponent = getPlayerByName(opponentName, p1, p2);
   const attacker = getPlayerByName(attackerName, p1, p2);
 
   if (!opponent || !attacker) {
     throw new Error(`Invalid opponent or attacker name: ${opponentName} ${attackerName}`);
   }
-
-  console.log('before attack');
 
   return attacker.attack$(opponent, turnDetail);
 }

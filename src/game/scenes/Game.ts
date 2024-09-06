@@ -23,8 +23,6 @@ export class Game extends Scene {
   }
 
   preload() {
-    this.p1.sprite = new Phaser.GameObjects.Sprite(this, 200, 600, this.p1.animationKey).setScale(4);
-    this.p2.sprite = new Phaser.GameObjects.Sprite(this, 800, 600, this.p2.animationKey).setScale(4);
     this.load.image('bgDayNinja', 'assets/background/bg-day-ninja.png');
     this.load.image('bgDayDesert', 'assets/background/bg-day-desert.png');
     this.load.image('bgNightNinja', 'assets/background/bg-night-ninja.png');
@@ -36,6 +34,10 @@ export class Game extends Scene {
   create() {
     const backgrounds = ['bgDayNinja', 'bgDayDesert', 'bgNightNinja', 'bgNightDeser', 'bgSky', 'bgPlain'];
     const randomBackground = Phaser.Math.RND.pick(backgrounds);
+
+    const selectedCharacter = this.registry.get('selectedCharacter') || 'assassin';
+    this.p1 = this.createPlayer('Bob', selectedCharacter, 'r', 20, 2, 200, 600);
+    this.p2 = this.createPlayer('Alice', 'mage', 'l', 21, 2, 800, 600);  // Joueur 2 par défaut pour l'exemple
 
     this.background = this.add.image(500, 400, randomBackground);
     this.title = this.add.text(506, 215, 'FIGHT', {
@@ -59,6 +61,10 @@ export class Game extends Scene {
 
   override update(time: number, delta: number): void {
     super.update(time, delta);
+  
+    if (!this.p1 || !this.p2 || !this.fight.length) {
+      return; // Wait until players and fight data are ready
+    }
   
     if (this.currentTurn && this.isTurnEnded) {
       this.isTurnEnded = false;
@@ -126,8 +132,22 @@ export class Game extends Scene {
     const barWidth = 400 * healthPercentage;
 
     // Redraw health bar
-    this.p2HealthBar.fillStyle(healthPercentage > 0.5 ? 0x00ff00 : 0xff0000, 1);  // Green if > 50% health, red if <= 50%
+    this.p2HealthBar.fillStyle(healthPercentage > 0.5 ? 0x00ff00 : 0xff0000, 1);  // Green if > 50% health, red if <= 50% d
     this.p2HealthBar.fillRect(this.cameras.main.width - 20 - barWidth, 20, barWidth, 40);
   }
 
+  createPlayer(reelName:string, characterName: string, direction: string, hp: number, attack: number, x: number, y: number): Player {
+    const validDirection = direction === 'r' || direction === 'l' ? direction : 'r';
+  
+    switch (characterName) {
+      case 'assassin':
+        return new Assassin(reelName, 'assassin', validDirection, hp, attack);
+      case 'mage':
+        return new Player(reelName, 'mage', validDirection, hp, attack);
+      case 'sherif':
+        return new Player(reelName, 'sherif', validDirection, hp, attack);
+      default:
+        return new Assassin(reelName, 'assassin', validDirection, hp, attack);
+    }
+  }
 }

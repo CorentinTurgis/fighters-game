@@ -34,7 +34,7 @@ export class Preloader extends Scene {
     this.#createAssassinSprites();
     this.#createMageSprites();
     this.#createSherifSprites();
-    this.scene.start('MainMenu');
+    this.scene.start('CharacterSelect');
   }
 
   #loadSprites() {

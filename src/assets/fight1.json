@@ -3,51 +3,50 @@
     "attackerName": "Bob",
     "opponentName": "Alice",
     "isHit": true,
-    "damage": 4,
+    "damage": 3,
     "attackerHp": 20,
-    "opponentHp": 16,
-    "ability": "special"
-  },
-  {
-    "attackerName": "Alice",
-    "opponentName": "Bob",
-    "isHit": true,
-    "damage": 2,
-    "attackerHp": 16,
-    "opponentHp": 18
-  },
-  {
-    "attackerName": "Bob",
-    "opponentName": "Alice",
-    "isHit": true,
-    "damage": 2,
-    "attackerHp": 18,
-    "opponentHp": 14
-  },
-  {
-    "attackerName": "Alice",
-    "opponentName": "Bob",
-    "isHit": true,
-    "damage": 5,
-    "attackerHp": 14,
-    "opponentHp": 13,
-    "ability": "special"
-  },
-  {
-    "attackerName": "Bob",
-    "opponentName": "Alice",
-    "isHit": true,
-    "damage": 2,
-    "attackerHp": 13,
-    "opponentHp": 12
+    "opponentHp": 17
   },
   {
     "attackerName": "Alice",
     "opponentName": "Bob",
     "isHit": true,
     "damage": 3,
-    "attackerHp": 12,
-    "opponentHp": 10,
+    "attackerHp": 17,
+    "opponentHp": 17
+  },
+  {
+    "attackerName": "Bob",
+    "opponentName": "Alice",
+    "isHit": false,
+    "damage": 0,
+    "attackerHp": 17,
+    "opponentHp": 17
+  },
+  {
+    "attackerName": "Alice",
+    "opponentName": "Bob",
+    "isHit": true,
+    "damage": 2,
+    "attackerHp": 17,
+    "opponentHp": 15
+  },
+  {
+    "attackerName": "Bob",
+    "opponentName": "Alice",
+    "isHit": true,
+    "damage": 3,
+    "attackerHp": 15,
+    "opponentHp": 14,
+    "ability": "special"
+  },
+  {
+    "attackerName": "Alice",
+    "opponentName": "Bob",
+    "isHit": true,
+    "damage": 3,
+    "attackerHp": 14,
+    "opponentHp": 12,
     "ability": "special"
   },
   {
@@ -55,74 +54,96 @@
     "opponentName": "Alice",
     "isHit": true,
     "damage": 1,
-    "attackerHp": 10,
+    "attackerHp": 12,
+    "opponentHp": 13
+  },
+  {
+    "attackerName": "Alice",
+    "opponentName": "Bob",
+    "isHit": true,
+    "damage": 3,
+    "attackerHp": 13,
+    "opponentHp": 9,
+    "ability": "special"
+  },
+  {
+    "attackerName": "Bob",
+    "opponentName": "Alice",
+    "isHit": true,
+    "damage": 2,
+    "attackerHp": 9,
     "opponentHp": 11
   },
   {
     "attackerName": "Alice",
     "opponentName": "Bob",
     "isHit": true,
-    "damage": 4,
+    "damage": 2,
     "attackerHp": 11,
-    "opponentHp": 6,
-    "ability": "special"
+    "opponentHp": 7
   },
   {
     "attackerName": "Bob",
     "opponentName": "Alice",
     "isHit": true,
     "damage": 3,
-    "attackerHp": 6,
-    "opponentHp": 8,
-    "ability": "special"
+    "attackerHp": 7,
+    "opponentHp": 8
+  },
+  {
+    "attackerName": "Alice",
+    "opponentName": "Bob",
+    "isHit": true,
+    "damage": 3,
+    "attackerHp": 8,
+    "opponentHp": 4
+  },
+  {
+    "attackerName": "Bob",
+    "opponentName": "Alice",
+    "isHit": true,
+    "damage": 1,
+    "attackerHp": 4,
+    "opponentHp": 7
   },
   {
     "attackerName": "Alice",
     "opponentName": "Bob",
     "isHit": true,
     "damage": 1,
-    "attackerHp": 8,
-    "opponentHp": 5
-  },
-  {
-    "attackerName": "Bob",
-    "opponentName": "Alice",
-    "isHit": true,
-    "damage": 4,
-    "attackerHp": 5,
-    "opponentHp": 4,
-    "ability": "special"
-  },
-  {
-    "attackerName": "Alice",
-    "opponentName": "Bob",
-    "isHit": true,
-    "damage": 2,
-    "attackerHp": 4,
+    "attackerHp": 7,
     "opponentHp": 3
   },
   {
     "attackerName": "Bob",
     "opponentName": "Alice",
     "isHit": true,
-    "damage": 2,
+    "damage": 1,
     "attackerHp": 3,
-    "opponentHp": 2
+    "opponentHp": 6
   },
   {
     "attackerName": "Alice",
     "opponentName": "Bob",
     "isHit": false,
     "damage": 0,
-    "attackerHp": 2,
+    "attackerHp": 6,
     "opponentHp": 3
   },
   {
     "attackerName": "Bob",
     "opponentName": "Alice",
     "isHit": true,
-    "damage": 5,
+    "damage": 2,
     "attackerHp": 3,
+    "opponentHp": 4
+  },
+  {
+    "attackerName": "Alice",
+    "opponentName": "Bob",
+    "isHit": true,
+    "damage": 4,
+    "attackerHp": 4,
     "opponentHp": 0,
     "ability": "special"
   }
