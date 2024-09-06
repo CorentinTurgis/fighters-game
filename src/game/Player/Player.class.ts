@@ -14,7 +14,7 @@ import { ListOfAnimationKey } from '../models/ListOfAnimationKey.type';
 import { FightTurn } from '../models/Fight.model';
 import { Game } from '../scenes/Game';
 
-export type PlayerClass = 'assassin' | 'mage' | 'sherif'
+export type PlayerClass = 'assassin' | 'mage' | 'sherif' | 'bot';
 
 export class Player {// La si on veux se faire vraiment plaisir il faudrait avoir des sous class Assassin etc pour surcharger les animations
   sprite: GameObjects.Sprite;

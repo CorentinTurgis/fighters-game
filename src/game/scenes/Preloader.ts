@@ -34,12 +34,13 @@ export class Preloader extends Scene {
     this.#createAssassinSprites();
     this.#createMageSprites();
     this.#createSherifSprites();
+    this.#createBotSprites();
     this.scene.start('CharacterSelect');
   }
 
   #loadSprites() {
     const animKeys: ListOfAnimationKey[] = ['attack', 'special', 'hit', 'run', 'idle'];
-    const classList: PlayerClass[] = ['assassin', 'mage', 'sherif'];
+    const classList: PlayerClass[] = ['assassin', 'mage', 'sherif', 'bot'];
 
     classList.forEach((className) => {
       this.load.setPath(`../assets/${className}`);
@@ -138,6 +139,33 @@ export class Preloader extends Scene {
     this.anims.create({
       key: 'mage-run',
       frames: this.anims.generateFrameNumbers('mage-run', { start: 0, end: 7 }),
+      frameRate: 14,
+    });
+  }
+
+  #createBotSprites() {
+    this.anims.create({
+      key: 'bot-idle',
+      frames: this.anims.generateFrameNumbers('bot-idle', { start: 0, end: 0 }),
+      frameRate: 50,
+      repeat: 1,
+    });
+
+    this.anims.create({
+      key: 'bot-attack',
+      frames: this.anims.generateFrameNumbers('bot-attack', { start: 0, end: 7 }),
+      frameRate: 16,
+    });
+
+    this.anims.create({
+      key: 'bot-hit',
+      frames: this.anims.generateFrameNumbers('bot-hit', { start: 0, end: 3 }),
+      frameRate: 6,
+    });
+
+    this.anims.create({
+      key: 'bot-run',
+      frames: this.anims.generateFrameNumbers('bot-run', { start: 0, end: 6 }),
       frameRate: 14,
     });
   }

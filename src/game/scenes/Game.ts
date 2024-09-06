@@ -12,7 +12,7 @@ export class Game extends Scene {
   logo: GameObjects.Image;
   title: GameObjects.Text;
   p1: Player = new Assassin('Bob', 'assassin', 'r', 20, 2);
-  p2: Player = new Player('Alice', 'mage', 'l', 21, 2);
+  bot: Player = new Player('Alice', 'bot', 'l', 21, 2);
   p1HealthBar: GameObjects.Graphics;
   p2HealthBar: GameObjects.Graphics;
   isTurnEnded: boolean = true;
@@ -39,7 +39,7 @@ export class Game extends Scene {
 
     const selectedCharacter = this.registry.get('selectedCharacter') || 'assassin';
     this.p1 = this.createPlayer('Bob', selectedCharacter, 'r', 20, 2, 200, 600);
-    this.p2 = this.createPlayer('Alice', 'mage', 'l', 21, 2, 800, 600);  // Joueur 2 par défaut pour l'exemple
+    this.bot = this.createPlayer('Alice', 'bot', 'l', 21, 2, 800, 600);  // Joueur 2 par défaut pour l'exemple
 
     this.background = this.add.image(500, 400, randomBackground);
     this.title = this.add.text(500, 100, 'FIGHT', {
@@ -52,8 +52,8 @@ export class Game extends Scene {
     }).setOrigin(0.5).setDepth(100);
 
     this.p1.setSprite(this.add.sprite(200, 600, this.p1.animationKey).setScale(4));
-    this.p2.setSprite(this.add.sprite(800, 600, this.p2.animationKey).setScale(4));
-    this.p2.sprite.setFlipX(true);
+    this.bot.setSprite(this.add.sprite(800, 600, this.bot.animationKey).setScale(4));
+    this.bot.sprite.setFlipX(true);
     this.createHealthBars();
     this.fight = this.cache.json.get('fight1');
     this.currentTurn = this.fight[0];
@@ -64,14 +64,14 @@ export class Game extends Scene {
   override update(time: number, delta: number): void {
     super.update(time, delta);
   
-    if (!this.p1 || !this.p2 || !this.fight.length) {
+    if (!this.p1 || !this.bot || !this.fight.length) {
       return; // Wait until players and fight data are ready
     }
   
     if (this.currentTurn && this.isTurnEnded) {
       this.isTurnEnded = false;
   
-      animateTurn(this.currentTurn, this.p1, this.p2)
+      animateTurn(this.currentTurn, this.p1, this.bot)
         .pipe(
           tap(() => {
             this.fight.shift();
@@ -81,11 +81,11 @@ export class Game extends Scene {
         )
         .subscribe();
       this.updateP1HealthBar(this.p1.hp, 20);
-      this.updateP2HealthBar(this.p2.hp, 20);
+      this.updateP2HealthBar(this.bot.hp, 20);
     } else {
       if (this.p1.hp <= 0)
         this.scene.start('GameOver');
-      else if (this.p2.hp <= 0)
+      else if (this.bot.hp <= 0)
         this.scene.start('Win');
     }
   }
@@ -165,7 +165,7 @@ export class Game extends Scene {
       case 'sherif':
         return new Player(reelName, 'sherif', validDirection, hp, attack);
       default:
-        return new Assassin(reelName, 'assassin', validDirection, hp, attack);
+        return new Player(reelName, 'bot', validDirection, hp, attack);
     }
   }
 }
