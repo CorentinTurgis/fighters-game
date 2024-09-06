@@ -5,6 +5,7 @@ import { FightTurn } from '../models/Fight.model';
 import { tap } from 'rxjs';
 import { animateTurn } from '../utils/fight.utils';
 import { Assassin } from '../Player/Assassin.class';
+import { Mage } from '../Player/Mage.class';
 
 export class Game extends Scene {
   background: GameObjects.Image;
@@ -160,7 +161,7 @@ export class Game extends Scene {
       case 'assassin':
         return new Assassin(reelName, 'assassin', validDirection, hp, attack);
       case 'mage':
-        return new Player(reelName, 'mage', validDirection, hp, attack);
+        return new Mage(reelName, 'mage', validDirection, hp, attack);
       case 'sherif':
         return new Player(reelName, 'sherif', validDirection, hp, attack);
       default:

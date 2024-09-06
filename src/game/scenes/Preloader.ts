@@ -55,6 +55,14 @@ export class Preloader extends Scene {
       });
     });
     this.load.setPath('../assets');
+    this.load.spritesheet({
+      key: 'mage-bullet',
+      url: 'mage/mage-bullet.png',
+      frameConfig: {
+        frameWidth: 32,
+        frameHeight: 32,
+      },
+    });
   }
 
   #createAssassinSprites() {
@@ -99,7 +107,7 @@ export class Preloader extends Scene {
       key: 'mage-idle',
       frames: this.anims.generateFrameNumbers('mage-idle', { start: 0, end: 0 }),
       frameRate: 50,
-      repeat: 1
+      repeat: 1,
     });
 
     this.anims.create({
@@ -112,6 +120,13 @@ export class Preloader extends Scene {
       key: 'mage-special',
       frames: this.anims.generateFrameNumbers('mage-special', { start: 0, end: 3 }),
       frameRate: 6,
+    });
+
+    this.anims.create({
+      key: 'mage-bullet',
+      frames: this.anims.generateFrameNumbers('mage-bullet', { start: 0, end: 9 }),
+      frameRate: 15,
+      repeat: -1,
     });
 
     this.anims.create({
@@ -132,7 +147,7 @@ export class Preloader extends Scene {
       key: 'sherif-idle',
       frames: this.anims.generateFrameNumbers('sherif-idle', { start: 0, end: 0 }),
       frameRate: 50,
-      repeat: 1
+      repeat: 1,
     });
     this.anims.create({
       key: 'sherif-attack',
