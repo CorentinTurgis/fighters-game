@@ -29,6 +29,7 @@ export class Game extends Scene {
     this.load.image('bgNightDeser', 'assets/background/bg-night-desert.png');
     this.load.image('bgSky', 'assets/background/bg-sky.png');
     this.load.image('bgPlain', 'assets/background/bg-plain.png');
+    this.load.image('healthBar', 'assets/gameplay/health-bar.png');
   }
 
   create() {
@@ -40,8 +41,8 @@ export class Game extends Scene {
     this.p2 = this.createPlayer('Alice', 'mage', 'l', 21, 2, 800, 600);  // Joueur 2 par défaut pour l'exemple
 
     this.background = this.add.image(500, 400, randomBackground);
-    this.title = this.add.text(506, 215, 'FIGHT', {
-      fontFamily: 'Arial Black',
+    this.title = this.add.text(500, 100, 'FIGHT', {
+      fontFamily: 'VT323',
       fontSize: 38,
       color: 'red',
       stroke: 'yellow',
@@ -105,37 +106,53 @@ export class Game extends Scene {
   }
 
   createHealthBars(): void {
-    // Player 1 health bar (top left)
+    const barWidth = 340;
+    const barHeight = 10;
+  
     this.p1HealthBar = this.add.graphics();
-    this.p1HealthBar.fillStyle(0x00ff00, 1);  // Green color for full health
-    this.p1HealthBar.fillRect(20, 20, 400, 40);  // Initial size of the health bar
-
-    // Player 2 health bar (top right)
+    this.p1HealthBar.fillStyle(0x00ff00, 1);
+    this.p1HealthBar.fillRect(80, 30, barWidth, barHeight);
+  
+    const healthBarP1 = this.add.image(260, 40, 'healthBar').setOrigin(0.5, 0.5);
+    healthBarP1.setScale(3);
+  
     this.p2HealthBar = this.add.graphics();
-    this.p2HealthBar.fillStyle(0x00ff00, 1);  // Green color for full health
-    this.p2HealthBar.fillRect(this.cameras.main.width - 220, 20, 400, 40);  // Initial size of the health bar
+    this.p2HealthBar.fillStyle(0x00ff00, 1);
+    this.p2HealthBar.fillRect(this.cameras.main.width - 360, 30, barWidth, barHeight);
+  
+    const healthBarP2 = this.add.image(this.cameras.main.width - 260, 40, 'healthBar').setOrigin(0.5, 0.5);
+    healthBarP2.setScale(3);
+    healthBarP2.setFlipX(true);
   }
-
+  
   updateP1HealthBar(currentHp: number, maxHp: number): void {
+    const barWidth = 340;  // Largeur de la barre de vie
+    const barHeight = 10;
+  
+    // Calcul du pourcentage de vie
+    const healthPercentage = currentHp / maxHp;
+    const adjustedWidth = barWidth * healthPercentage;
+  
+    // Mise à jour graphique
     this.p1HealthBar.clear();
-    const healthPercentage = currentHp / maxHp;
-    const barWidth = 400 * healthPercentage;  // Scale bar width based on health percentage
-
-    // Redraw health bar
-    this.p1HealthBar.fillStyle(healthPercentage > 0.5 ? 0x00ff00 : 0xff0000, 1);  // Green if > 50% health, red if <= 50%
-    this.p1HealthBar.fillRect(20, 20, barWidth, 40);
+    this.p1HealthBar.fillStyle(healthPercentage > 0.5 ? 0x00ff00 : 0xff0000, 1);  // Vert > 50%, Rouge < 50%
+    this.p1HealthBar.fillRect(80, 30, adjustedWidth, barHeight);  // Ajustement de la largeur selon la vie
   }
-
+  
   updateP2HealthBar(currentHp: number, maxHp: number): void {
-    this.p2HealthBar.clear();
+    const barWidth = 340;  // Largeur de la barre de vie
+    const barHeight = 10;  // Hauteur de la barre de vie
+  
+    // Calcul du pourcentage de vie
     const healthPercentage = currentHp / maxHp;
-    const barWidth = 400 * healthPercentage;
-
-    // Redraw health bar
-    this.p2HealthBar.fillStyle(healthPercentage > 0.5 ? 0x00ff00 : 0xff0000, 1);  // Green if > 50% health, red if <= 50% d
-    this.p2HealthBar.fillRect(this.cameras.main.width - 20 - barWidth, 20, barWidth, 40);
+    const adjustedWidth = barWidth * healthPercentage;
+  
+    // Mise à jour graphique
+    this.p2HealthBar.clear();
+    this.p2HealthBar.fillStyle(healthPercentage > 0.5 ? 0x00ff00 : 0xff0000, 1);  // Vert > 50%, Rouge < 50%
+    this.p2HealthBar.fillRect(this.cameras.main.width - 380 + (barWidth - adjustedWidth), 30, adjustedWidth, barHeight);
   }
-
+  
   createPlayer(reelName:string, characterName: string, direction: string, hp: number, attack: number, x: number, y: number): Player {
     const validDirection = direction === 'r' || direction === 'l' ? direction : 'r';
   

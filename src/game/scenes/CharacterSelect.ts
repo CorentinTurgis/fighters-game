@@ -6,10 +6,14 @@ export class CharacterSelect extends Scene {
   }
 
   create() {
-    this.add.text(500, 100, 'Select Your Character', {
-      fontSize: '32px',
-      color: '#ffffff',
-    }).setOrigin(0.5);
+    this.add.text(500, 100, 'SELECT YOUR CHARACTER', {
+        fontFamily: 'VT323',
+        fontSize: 38,
+        color: 'red',
+        stroke: 'yellow',
+        strokeThickness: 8,
+        align: 'center',
+      }).setOrigin(0.5).setDepth(100);
 
     const characters = [
       { name: 'assassin', key: 'assassin-idle', x: 300, y: 400 },
@@ -25,6 +29,7 @@ export class CharacterSelect extends Scene {
       });
 
       this.add.text(character.x, character.y + 80, character.name, {
+        fontFamily: 'VT323',
         fontSize: '24px',
         color: '#ffffff',
       }).setOrigin(0.5);
