@@ -3,92 +3,91 @@
     "attackerName": "Bob",
     "opponentName": "Alice",
     "isHit": true,
-    "damage": 2,
+    "damage": 5,
     "attackerHp": 20,
-    "opponentHp": 18
-  },
-  {
-    "attackerName": "Alice",
-    "opponentName": "Bob",
-    "isHit": true,
-    "damage": 3,
-    "attackerHp": 18,
-    "opponentHp": 17
-  },
-  {
-    "attackerName": "Bob",
-    "opponentName": "Alice",
-    "isHit": true,
-    "damage": 4,
-    "attackerHp": 17,
-    "opponentHp": 14,
+    "opponentHp": 15,
     "ability": "special"
   },
   {
     "attackerName": "Alice",
     "opponentName": "Bob",
     "isHit": true,
-    "damage": 4,
+    "damage": 5,
+    "attackerHp": 15,
+    "opponentHp": 15,
+    "ability": "special"
+  },
+  {
+    "attackerName": "Bob",
+    "opponentName": "Alice",
+    "isHit": true,
+    "damage": 1,
+    "attackerHp": 15,
+    "opponentHp": 14
+  },
+  {
+    "attackerName": "Alice",
+    "opponentName": "Bob",
+    "isHit": true,
+    "damage": 2,
     "attackerHp": 14,
-    "opponentHp": 13,
-    "ability": "special"
+    "opponentHp": 13
   },
   {
     "attackerName": "Bob",
     "opponentName": "Alice",
     "isHit": true,
-    "damage": 3,
+    "damage": 4,
     "attackerHp": 13,
-    "opponentHp": 11
-  },
-  {
-    "attackerName": "Alice",
-    "opponentName": "Bob",
-    "isHit": true,
-    "damage": 3,
-    "attackerHp": 11,
     "opponentHp": 10,
     "ability": "special"
   },
   {
-    "attackerName": "Bob",
-    "opponentName": "Alice",
-    "isHit": true,
-    "damage": 4,
-    "attackerHp": 10,
-    "opponentHp": 7,
-    "ability": "special"
-  },
-  {
     "attackerName": "Alice",
     "opponentName": "Bob",
-    "isHit": true,
-    "damage": 1,
-    "attackerHp": 7,
-    "opponentHp": 9
+    "isHit": false,
+    "damage": 0,
+    "attackerHp": 10,
+    "opponentHp": 13
   },
   {
     "attackerName": "Bob",
     "opponentName": "Alice",
     "isHit": true,
     "damage": 2,
-    "attackerHp": 9,
+    "attackerHp": 13,
+    "opponentHp": 8
+  },
+  {
+    "attackerName": "Alice",
+    "opponentName": "Bob",
+    "isHit": true,
+    "damage": 2,
+    "attackerHp": 8,
+    "opponentHp": 11
+  },
+  {
+    "attackerName": "Bob",
+    "opponentName": "Alice",
+    "isHit": true,
+    "damage": 3,
+    "attackerHp": 11,
     "opponentHp": 5
   },
   {
     "attackerName": "Alice",
     "opponentName": "Bob",
     "isHit": true,
-    "damage": 3,
+    "damage": 2,
     "attackerHp": 5,
-    "opponentHp": 6
+    "opponentHp": 9
   },
   {
     "attackerName": "Bob",
     "opponentName": "Alice",
     "isHit": true,
     "damage": 4,
-    "attackerHp": 6,
+    "attackerHp": 9,
     "opponentHp": 1,
     "ability": "special"
   },
@@ -98,14 +97,14 @@
     "isHit": true,
     "damage": 2,
     "attackerHp": 1,
-    "opponentHp": 4
+    "opponentHp": 7
   },
   {
     "attackerName": "Bob",
     "opponentName": "Alice",
     "isHit": true,
     "damage": 2,
-    "attackerHp": 4,
+    "attackerHp": 7,
     "opponentHp": 0
   }
 ]
