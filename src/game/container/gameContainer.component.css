@@ -7,6 +7,15 @@
     align-items: center;
 }
 
+@font-face {
+    font-family: 'DamageFont'; /* The name you'll use in Phaser */
+    src: url('../../assets/fonts/damage.ttf') format('truetype');
+}
+
+body {
+    font-family: 'CustomFont', sans-serif; /* Apply globally if needed */
+}
+
 .game-container {
     display: flex;
     align-items: center;

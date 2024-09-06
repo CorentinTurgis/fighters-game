@@ -1,4 +1,6 @@
 import { Scene } from 'phaser';
+import { ListOfAnimationKey } from '../models/ListOfAnimationKey.type';
+import { PlayerClass } from '../Player/Player.class';
 
 export class Preloader extends Scene {
   constructor() {
@@ -6,12 +8,9 @@ export class Preloader extends Scene {
   }
 
   init() {
-    const backgrounds = ['bgDayNinja', 'bgDayDesert', 'bgNightNinja', 'bgNightDesert', 'bgSky', 'bgPlain'];
-
-    const randomBackground = Phaser.Math.RND.pick(backgrounds);
 
     //  We loaded this image in our Boot Scene, so we can display it here
-    this.add.image(512, 384, randomBackground);
+    this.add.image(512, 384, 'bg');
     //  A simple progress bar. This is the outline of the bar.
     this.add.rectangle(512, 384, 468, 32).setStrokeStyle(1, 0xffffff);
 
@@ -24,9 +23,7 @@ export class Preloader extends Scene {
 
   preload() {
     //  Load the assets for the game
-    this.#loadAssassinSprites();
-    this.#loadMageSprites();
-    this.#loadSherifSprites();
+    this.#loadSprites();
     this.load.json('fight1', 'fight1.json');
   }
 
@@ -38,6 +35,26 @@ export class Preloader extends Scene {
     this.#createMageSprites();
     this.#createSherifSprites();
     this.scene.start('MainMenu');
+  }
+
+  #loadSprites() {
+    const animKeys: ListOfAnimationKey[] = ['attack', 'special', 'hit', 'run', 'idle'];
+    const classList: PlayerClass[] = ['assassin', 'mage', 'sherif'];
+
+    classList.forEach((className) => {
+      this.load.setPath(`../assets/${className}`);
+      animKeys.forEach((key) => {
+        this.load.spritesheet({
+          key: `${className}-${key}`,
+          url: `${className}-${key}.png`,
+          frameConfig: {
+            frameWidth: `${className}-${key}` !== 'sherif-idle' ? 32 : 42,
+            frameHeight: 32,
+          },
+        });
+      });
+    });
+    this.load.setPath('../assets')
   }
 
   #createAssassinSprites() {
@@ -58,7 +75,7 @@ export class Preloader extends Scene {
     this.anims.create({
       key: 'assassin-special',
       frames: this.anims.generateFrameNumbers('assassin-special', { start: 0, end: 4 }),
-      frameRate: 6,
+      frameRate: 15,
       repeat: 1,
     });
 
@@ -77,34 +94,7 @@ export class Preloader extends Scene {
     });
   }
 
-  #loadAssassinSprites() {
-    this.load.setPath('../assets/assassin');
-
-    this.load.spritesheet('assassin-idle', 'assassin-idle.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.spritesheet('assassin-attack', 'assassin-attack.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.spritesheet('assassin-special', 'assassin-special.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.spritesheet('assassin-hit', 'assassin-hit.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.spritesheet('assassin-run', 'assassin-run.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.setPath('assets/');
-  }
-
   #createMageSprites() {
-
     this.anims.create({
       key: 'mage-idle',
       frames: this.anims.generateFrameNumbers('mage-idle', { start: 0, end: 0 }),
@@ -137,32 +127,6 @@ export class Preloader extends Scene {
     });
   }
 
-  #loadMageSprites() {
-    this.load.setPath('../assets/mage');
-
-    this.load.spritesheet('mage-idle', 'mage-idle.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.spritesheet('mage-attack', 'mage-attack.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.spritesheet('mage-special', 'mage-special.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.spritesheet('mage-hit', 'mage-hit.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.spritesheet('mage-run', 'mage-run.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.setPath('assets/');
-  }
-
   #createSherifSprites() {
     this.anims.create({
       key: 'sherif-idle',
@@ -193,31 +157,5 @@ export class Preloader extends Scene {
       frames: this.anims.generateFrameNumbers('sherif-run', { start: 0, end: 7 }),
       frameRate: 13,
     });
-  }
-
-  #loadSherifSprites() {
-    this.load.setPath('../assets/sherif');
-
-    this.load.spritesheet('sherif-idle', 'sherif-idle.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.spritesheet('sherif-attack', 'sherif-attack.png', {
-      frameWidth: 42,
-      frameHeight: 32,
-    });
-    this.load.spritesheet('sherif-special', 'sherif-special.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.spritesheet('sherif-hit', 'sherif-hit.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.spritesheet('sherif-run', 'sherif-run.png', {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    this.load.setPath('assets/');
   }
 }
